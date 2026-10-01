@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: "Italiana", "Playfair Display", Georgia, serif;
+  --font-display: "Cinzel", "Italiana", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-ivory: #F4F1EB;
+  --color-ivory-light: #FAF8F5;
+  --color-limestone: #D8D0C3;
+  --color-limestone-light: #E8E2D8;
+  --color-charcoal: #20221F;
+  --color-charcoal-dark: #121311;
+  --color-charcoal-surface: #1A1C19;
+  --color-charcoal-muted: #2E322C;
+  --color-olive: #68705C;
+  --color-olive-dark: #4A5141;
+  --color-bronze: #977B58;
+  --color-bronze-light: #B79A73;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Marquee continuous motion */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-progress {
+  animation: progress 7.5s linear infinite;
+}
+
+/* Subtle architectural line reveals */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+/* Glassmorphism restrained overlays */
+.glass-panel {
+  background: rgba(244, 241, 235, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 208, 195, 0.5);
+}
+
+.dark .glass-panel {
+  background: rgba(18, 19, 17, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dark {
+  background: rgba(18, 19, 17, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 2px;
+}
