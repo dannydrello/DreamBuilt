@@ -1,416 +1,353 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useRouter } from '../context/RouterContext';
-import { PROJECTS } from '../data/projects';
-import { ARTICLES } from '../data/articles';
-import { Signature3DExperience } from '../components/Signature3DExperience';
 import { InteractiveLightSlider } from '../components/InteractiveLightSlider';
-import { AnnotatedImage } from '../components/AnnotatedImage';
-import { ContinuousFilmstrip } from '../components/ContinuousFilmstrip';
-import { FoldingPictureGallery } from '../components/FoldingPictureGallery';
-import { ArchitecturalVideoSlider } from '../components/ArchitecturalVideoSlider';
-import { ImageWithFallback } from '../components/ImageWithFallback';
+import { Signature3DExperience } from '../components/Signature3DExperience';
 
 export const HomePage: React.FC = () => {
   const { navigate } = useRouter();
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
-  const selectedProjects = PROJECTS.slice(0, 4);
-  const featuredArticles = ARTICLES.slice(0, 3);
+  const services = [
+    {
+      num: '01',
+      title: 'ARCHITECTURAL DESIGN',
+      description: 'Custom home concepts tailored to your lifestyle, site, and vision. From first sketches to full project documentation.'
+    },
+    {
+      num: '02',
+      title: 'TURNKEY CONSTRUCTION',
+      description: 'We handle the entire build — planning, materials, and execution — delivering a ready-to-live home with zero hassle.'
+    },
+    {
+      num: '03',
+      title: 'PROJECT MANAGEMENT',
+      description: 'Full control over timelines, budget, and quality — ensuring every stage runs smoothly and meets the highest standards.'
+    },
+    {
+      num: '04',
+      title: 'INTERIOR FINISHING',
+      description: 'Thoughtfully designed interiors with high-quality materials, precise detailing, and a cohesive modern look.'
+    }
+  ];
+
+  const steps = [
+    {
+      word: 'one',
+      title: 'CONCEPT & PLANNING',
+      description: 'We define your vision, develop layouts, and create a clear project roadmap with timelines and budget.'
+    },
+    {
+      word: 'two',
+      title: 'DESIGN & DEVELOPMENT',
+      description: 'Detailed architectural and engineering solutions are prepared, ensuring precision before construction begins.'
+    },
+    {
+      word: 'three',
+      title: 'BUILD & DELIVERY',
+      description: 'We manage the full construction process and deliver a fully finished, move-in ready home.'
+    }
+  ];
+
+  const projects = [
+    {
+      id: 'p1',
+      title: 'Mountain Glass Retreat',
+      description: 'A modern open frame villa with panoramic views, where raw nature meets clean lines.',
+      image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80',
+      slug: 'epe-lagoon-villa'
+    },
+    {
+      id: 'p2',
+      title: 'Forest Reading Nook',
+      description: 'A quiet, light-filled sanctuary for deep contemplation nestled in native pines.',
+      image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+      slug: 'ikoyi-courtyard-villa'
+    },
+    {
+      id: 'p3',
+      title: 'Warm Stone Living Room',
+      description: 'A cosy, grounded space with dry-joint limestone and ambient comfort.',
+      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80',
+      slug: 'koto-house'
+    },
+    {
+      id: 'p4',
+      title: 'Modern Open Residence',
+      description: 'A spacious cantilevered home with seamless raw natural materials and refined execution.',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+      slug: 'monolith-hill'
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-[#F4F1EB] dark:bg-[#121311] text-[#20221F] dark:text-[#F4F1EB] transition-colors duration-500 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0E1013] text-[#F3F4F6] selection:bg-white/20 selection:text-white font-sans overflow-x-hidden">
       
-      {/* ============================================================
-          STREAM 01: HERO FULL-BLEED ARCHITECTURAL FILM (NO SOUND BUTTON)
-          ============================================================ */}
-      <section className="relative w-full h-[95vh] min-h-[660px] flex items-end justify-start overflow-hidden bg-[#121311]">
-        <video
-          ref={heroVideoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1920&q=80"
-          className="absolute inset-0 w-full h-full object-cover opacity-85 transition-opacity duration-1000 scale-[1.02] pointer-events-none"
-        >
-          <source
-            src="https://assets.mixkit.co/videos/preview/mixkit-modern-living-room-with-a-view-of-the-garden-42867-large.mp4"
-            type="video/mp4"
+      {/* =========================================================================
+          HERO SECTION: 3D DEPTH EFFECT (TEXT BEHIND HOUSE) + PICTURE IN MOTION
+          ========================================================================= */}
+      <section className="relative w-full min-h-[96vh] md:min-h-screen flex flex-col justify-between pt-24 pb-14 px-6 md:px-12 lg:px-16 overflow-hidden bg-[#0B0C0E]">
+        
+        {/* LAYER 1 (z-0): BACKGROUND PICTURE WITH CONTINUOUS SUBTLE MOTION */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2560&q=85"
+            alt="Modern architectural villa at dusk with warm glowing interior lights"
+            className="w-full h-full object-cover object-center animate-picture-motion"
           />
-        </video>
+          {/* Sky gradient overlay for contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0C0E]/80 via-transparent to-[#0E1013]" />
+          <div className="absolute inset-0 bg-black/35" />
+        </div>
 
-        {/* Ambient Film Scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/30 pointer-events-none" />
-
-        {/* Hero Copy (Uncluttered, airy typography) */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pb-20 md:pb-28 w-full">
-          <div className="max-w-3xl space-y-8">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8D0C3] block">
-              Residential Architectural Practice · Lagos · Abuja · London
-            </span>
-            
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-serif text-white tracking-tight leading-[1.08] text-balance">
-              Imagine the life.<br />
-              <span className="italic font-light text-[#D8D0C3]">We’ll shape the space.</span>
+        {/* LAYER 2 (z-10): REDUCED TITLE TEXT "DREAMBUILT" WITH FLOAT ANIMATION (BEHIND THE HOUSE) */}
+        <div className="relative z-10 w-full text-center pt-8 md:pt-4 select-none pointer-events-none">
+          <div className="animate-text-behind inline-block">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black uppercase tracking-[0.14em] text-white/95 leading-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)]">
+              DREAMBUILT
             </h1>
+          </div>
+        </div>
 
-            <p className="text-base sm:text-xl text-white/85 font-sans font-light max-w-xl leading-relaxed">
-              Thoughtful residential architecture for the way you want to live. Contemporary waterfront retreats, shaded courtyards, and enduring natural geology.
-            </p>
+        {/* LAYER 3 (z-20): FOREGROUND HOUSE LAYER CLIPPED TO ROOFLINE SO TEXT IS PARTIALLY BEHIND IT */}
+        <div 
+          className="absolute inset-0 z-20 overflow-hidden pointer-events-none"
+          style={{
+            clipPath: 'polygon(0% 36%, 14% 34%, 28% 35%, 44% 31%, 64% 30%, 82% 33%, 100% 34%, 100% 100%, 0% 100%)'
+          }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2560&q=85"
+            alt="Foreground villa architectural structure"
+            className="w-full h-full object-cover object-center animate-picture-motion"
+          />
+          {/* Subtle ground gradient for deep integration */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0E1013] via-transparent to-transparent opacity-85" />
+          <div className="absolute inset-0 bg-black/15" />
+        </div>
 
-            <div className="flex flex-wrap items-center gap-5 pt-4">
+        {/* LAYER 4 (z-30): HERO LOWER CONTENT (SLOGAN, CTAs, METRIC STATS) */}
+        <div className="relative z-30 max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-end pt-12 md:pt-24">
+          
+          {/* Left Column: Slogan & CTAs */}
+          <div className="lg:col-span-6 space-y-6">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-[1.05]">
+              DESIGN. BUILD.<br />
+              MOVE IN.
+            </h2>
+
+            <div className="flex flex-wrap items-center gap-4 pt-1">
               <button
                 onClick={() => navigate('/projects')}
-                className="px-8 py-4 text-xs font-mono uppercase tracking-widest font-semibold text-[#121311] bg-[#F4F1EB] hover:bg-[#D8D0C3] transition-all rounded-sm cursor-pointer shadow-lg hover:shadow-xl"
+                className="px-7 py-3 text-xs md:text-sm font-semibold uppercase tracking-wider text-black bg-white hover:bg-white/90 rounded-xs transition-colors cursor-pointer shadow-lg"
               >
-                Explore our work
+                Explore catalog
               </button>
               <button
                 onClick={() => navigate('/contact')}
-                className="px-8 py-4 text-xs font-mono uppercase tracking-widest font-semibold text-white bg-transparent hover:bg-white/10 border border-white/30 transition-all rounded-sm cursor-pointer"
+                className="px-7 py-3 text-xs md:text-sm font-semibold uppercase tracking-wider text-white bg-black/40 hover:bg-black/60 border border-white/30 rounded-xs transition-colors cursor-pointer backdrop-blur-xs"
               >
-                Start your project
+                Book project
               </button>
             </div>
           </div>
-        </div>
 
-        <div className="absolute bottom-6 right-4 md:right-12 z-10 text-[11px] font-mono uppercase tracking-widest text-white/50 flex items-center gap-2">
-          <span>Scroll to explore moving studies</span>
-          <span className="animate-bounce">↓</span>
-        </div>
-      </section>
-
-      {/* ============================================================
-          STREAM 02: CONTINUOUS MOVING FILMSTRIP
-          ============================================================ */}
-      <ContinuousFilmstrip />
-
-      {/* ============================================================
-          STREAM 03: BEAUTIFUL NIGERIAN ARCHITECTURAL STUDY 01 (EPE LAGOON)
-          ============================================================ */}
-      <section className="py-28 px-4 md:px-8 lg:px-12 bg-[#FAF8F5] dark:bg-[#161815] transition-colors duration-500">
-        <div className="max-w-7xl mx-auto space-y-12">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#D8D0C3] dark:border-white/10 gap-4">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#977B58] animate-ping" />
-                <span className="text-xs font-mono uppercase tracking-widest text-[#977B58]">
-                  Nigerian Waterfront Commission Study · Lagos
-                </span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-serif text-[#20221F] dark:text-white leading-tight">
-                The Epe Lagoon Pavilion
-              </h2>
-            </div>
-            <div className="text-xs font-mono text-[#20221F]/70 dark:text-white/60">
-              Laterite Earth Plaster · Floating Iroko Boardwalks · Epe, Lagos
-            </div>
-          </div>
-
-          <AnnotatedImage
-            src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1920&q=80"
-            alt="Luxury contemporary waterside villa with tropical palms, reflecting pool and deep overhangs in Lagos Nigeria"
-            caption="The Epe Lagoon Pavilion: Elevating tropical residential living along the mangrove lagoon."
-            hotspots={[
-              {
-                id: 'laterite_plaster',
-                x: 28,
-                y: 65,
-                title: 'Warm Laterite Earth Plaster',
-                description: 'Local terracotta clay plaster offering natural thermal cooling and rich textural warmth under equatorial sunlight.'
-              },
-              {
-                id: 'iroko_louvres',
-                x: 64,
-                y: 35,
-                title: 'Operable Iroko Brise-Soleil',
-                description: 'Rot-resistant West African hardwood louvres deflect blinding midday water reflection while welcoming maritime breezes.'
-              },
-              {
-                id: 'infinity_basin',
-                x: 75,
-                y: 78,
-                title: 'Convective Reflection Pool',
-                description: 'Shallow water mirror cools prevailing ocean breezes before they circulate into double-height sleeping pavilions.'
-              }
-            ]}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-6 items-center">
-            <div className="md:col-span-8">
-              <p className="text-xl md:text-2xl font-serif text-[#20221F] dark:text-[#D8D0C3] italic leading-relaxed">
-                “In the tropical climate of Lagos, architecture is not an enclosure to trap cool air, but a shaded instrument that breathes with the water and the trees.”
+          {/* Right Column: Mission Paragraph & The 3 Vertical Metric Dividers */}
+          <div className="lg:col-span-6 space-y-6 lg:pl-8">
+            <div className="space-y-2">
+              <p className="text-xs md:text-sm text-white/90 font-medium tracking-wide">
+                Seamless, precise, and built to last — your home, done right.
+              </p>
+              <p className="text-xs md:text-sm text-white/70 font-light leading-relaxed max-w-xl">
+                Crafted from concept to completion, we design and build homes that feel truly yours. Every detail is thoughtfully executed — from the first sketch to the final finish.
               </p>
             </div>
-            <div className="md:col-span-4 flex justify-start md:justify-end">
-              <button
-                onClick={() => navigate('/projects/epe-lagoon-villa')}
-                className="px-7 py-3.5 bg-[#20221F] dark:bg-[#F4F1EB] text-white dark:text-[#121311] text-xs font-mono uppercase tracking-wider rounded-sm hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
-              >
-                Inspect Epe Study →
-              </button>
+
+            {/* The 3 Metric Dividers */}
+            <div className="flex items-center gap-8 md:gap-12 pt-3 border-t border-white/15">
+              <div className="border-l-2 border-white/80 pl-3">
+                <span className="text-2xl md:text-3xl font-bold text-white block">200+</span>
+                <span className="text-[11px] text-white/60 block tracking-normal">ready-made projects</span>
+              </div>
+              <div className="border-l-2 border-white/80 pl-3">
+                <span className="text-2xl md:text-3xl font-bold text-white block">180+</span>
+                <span className="text-[11px] text-white/60 block tracking-normal">completed buildings</span>
+              </div>
+              <div className="border-l-2 border-white/80 pl-3">
+                <span className="text-2xl md:text-3xl font-bold text-white block">90+</span>
+                <span className="text-[11px] text-white/60 block tracking-normal">buildings in operation</span>
+              </div>
             </div>
           </div>
 
         </div>
+
       </section>
 
-      {/* ============================================================
-          STREAM 04: PICTURES FOLDING & WRAPPING 3D INTERACTIVE GALLERY
-          ============================================================ */}
-      <FoldingPictureGallery />
-
-      {/* ============================================================
-          STREAM 05: ARCHITECTURAL MULTI-HOUSE VIDEO SLIDER
-          ============================================================ */}
-      <ArchitecturalVideoSlider />
-
-      {/* ============================================================
-          STREAM 06: PURBECK LIMESTONE & CEDAR DAY/NIGHT CURTAIN SLIDER
-          ============================================================ */}
-      <InteractiveLightSlider />
-
-      {/* ============================================================
-          STREAM 07: BEAUTIFUL NIGERIAN ARCHITECTURAL STUDY 02 (IKOYI)
-          ============================================================ */}
-      <section className="py-28 px-4 md:px-8 lg:px-12 bg-[#F4F1EB] dark:bg-[#121311] transition-colors duration-500">
-        <div className="max-w-7xl mx-auto space-y-16">
+      {/* =========================================================================
+          SECTION 2: ALL SERVICES (What we provide + 4 Columns with 01 02 03 04)
+          ========================================================================= */}
+      <section id="services" className="py-24 md:py-32 px-6 md:px-12 lg:px-16 max-w-[1400px] mx-auto border-t border-white/10">
+        <div className="space-y-12">
           
-          <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#977B58] block">
-              Lagos Urban Sanctuary · Study 02
+          <div className="space-y-1">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono block">
+              What we provide
             </span>
-            <h2 className="text-4xl sm:text-6xl font-serif text-[#20221F] dark:text-white leading-tight">
-              The Ikoyi Courtyard Villa
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white uppercase">
+              ALL SERVICES
             </h2>
-            <p className="text-base text-[#20221F]/70 dark:text-white/70 font-sans font-light leading-relaxed">
-              Fluted terracotta brise-soleil, floating volcanic basalt steps, and double-height botanical courts in prime Ikoyi.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-stretch">
-            
-            {/* Left: Ikoyi Villa Architectural View */}
-            <div 
-              onClick={() => navigate('/projects/ikoyi-courtyard-villa')}
-              className="md:col-span-7 group cursor-pointer border border-[#D8D0C3] dark:border-white/10 bg-white dark:bg-[#1A1C19] p-6 flex flex-col justify-between transition-transform duration-500 hover:shadow-xl space-y-6"
-            >
-              <div className="relative overflow-hidden bg-[#20221F] aspect-[16/10]">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80"
-                  alt="Modern luxury architectural residence in tropical Ikoyi Lagos Nigeria"
-                  fallbackTitle="Ikoyi Villa"
-                  aspectRatioClass="aspect-[16/10]"
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                />
-                <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-xs text-white text-[10px] font-mono uppercase px-3 py-1 tracking-wider">
-                  Ikoyi Sanctuary · Lagos
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+            {services.map((item) => (
+              <div key={item.num} className="relative group space-y-4">
+                {/* Big faint watermark number in background */}
+                <div className="text-6xl md:text-7xl font-mono font-black text-white/5 group-hover:text-white/10 transition-colors select-none">
+                  {item.num}
+                </div>
+
+                <div className="space-y-2 relative -mt-6">
+                  <h3 className="text-sm font-bold tracking-wide text-white uppercase">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-white/60 leading-relaxed font-light">
+                    {item.description}
+                  </p>
                 </div>
               </div>
-
-              <div className="space-y-2">
-                <h3 className="text-2xl sm:text-3xl font-serif text-[#20221F] dark:text-white group-hover:text-[#977B58] transition-colors leading-snug">
-                  Secluded Botanical Courtyard
-                </h3>
-                <p className="text-sm text-[#20221F]/70 dark:text-white/60 font-sans leading-relaxed font-light">
-                  Deep terracotta louvres grant complete acoustic privacy from the metropolis while allowing sea breezes from Lagos lagoon to circulate.
-                </p>
-              </div>
-            </div>
-
-            {/* Right: Tactile Materiality Detail */}
-            <div className="md:col-span-5 border border-[#D8D0C3] dark:border-white/10 bg-white dark:bg-[#1A1C19] p-6 flex flex-col justify-between space-y-6">
-              <div className="relative overflow-hidden bg-[#20221F] aspect-[4/3]">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1000&q=80"
-                  alt="Tropical palm resort pavilion and reflecting water"
-                  fallbackTitle="Tropical Water Basin"
-                  aspectRatioClass="aspect-[4/3]"
-                  className="object-cover"
-                />
-                <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-xs text-white text-[10px] font-mono uppercase px-3 py-1 tracking-wider">
-                  Atmosphere
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="text-2xl font-serif text-[#20221F] dark:text-white leading-snug">
-                  Water & Canopy Integration
-                </h3>
-                <p className="text-sm text-[#20221F]/70 dark:text-white/60 font-sans leading-relaxed font-light">
-                  Reflective water basins inspired by traditional Nigerian compound courtyards, creating micro-climates that lower ambient temperature by up to 4°C.
-                </p>
-              </div>
-            </div>
-
+            ))}
           </div>
 
         </div>
       </section>
 
-      {/* ============================================================
-          STREAM 08: SIGNATURE 3D INTERACTIVE HOUSE PROGRESSION
-          ============================================================ */}
-      <Signature3DExperience />
-
-      {/* ============================================================
-          STREAM 09: CURATED PORTFOLIO ARCHIVE
-          ============================================================ */}
-      <section className="py-28 px-4 md:px-8 lg:px-12 bg-[#FAF8F5] dark:bg-[#161815] transition-colors duration-500">
-        <div className="max-w-7xl mx-auto space-y-16">
+      {/* =========================================================================
+          SECTION 3: THREE-STEP ORDER (Steps + one, two, three)
+          ========================================================================= */}
+      <section className="py-24 md:py-32 px-6 md:px-12 lg:px-16 max-w-[1400px] mx-auto border-t border-white/10">
+        <div className="space-y-12">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#D8D0C3] dark:border-white/10 gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#977B58] block">
-                Curated Portfolio Archive
+          <div className="space-y-1">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono block">
+              Steps
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white uppercase">
+              TREE-STEP ORDER
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {steps.map((st) => (
+              <div key={st.word} className="space-y-3 relative group">
+                <span className="text-2xl md:text-3xl font-serif italic text-white/30 block select-none">
+                  {st.word}.
+                </span>
+                <h3 className="text-sm font-bold tracking-wide text-white uppercase">
+                  {st.title}
+                </h3>
+                <p className="text-xs text-white/60 leading-relaxed font-light">
+                  {st.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 4: OUR PROJECTS (Portfolio + 4 Tall Vertical Image Cards)
+          ========================================================================= */}
+      <section className="py-24 md:py-32 px-6 md:px-12 lg:px-16 max-w-[1400px] mx-auto border-t border-white/10">
+        <div className="space-y-10">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-xs uppercase tracking-widest text-white/40 font-mono block">
+                Portfolio
               </span>
-              <h2 className="text-4xl md:text-6xl font-serif text-[#20221F] dark:text-white leading-tight">
-                Selected Works & Studies
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white uppercase">
+                OUR PROJECTS
               </h2>
             </div>
+            
             <button
               onClick={() => navigate('/projects')}
-              className="text-xs font-mono uppercase tracking-wider text-[#20221F] dark:text-white hover:text-[#977B58] transition-colors border-b border-[#20221F] dark:border-white pb-1 cursor-pointer"
+              className="text-xs uppercase tracking-wider text-white/80 hover:text-white px-4 py-2 border border-white/20 hover:border-white/50 rounded-xs transition-colors cursor-pointer self-start sm:self-auto"
             >
-              View complete archive →
+              View full gallery
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-14 lg:gap-20">
-            {selectedProjects.map((project, idx) => (
-              <article
-                key={project.slug}
-                onClick={() => navigate(`/projects/${project.slug}`)}
-                className="group cursor-pointer flex flex-col justify-between space-y-5"
+          {/* 4 Vertical Architectural Image Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {projects.map((proj) => (
+              <div
+                key={proj.id}
+                onClick={() => navigate(`/projects/${proj.slug}`)}
+                className="group cursor-pointer flex flex-col justify-between space-y-4"
               >
-                <div className="relative overflow-hidden bg-[#20221F] border border-[#D8D0C3] dark:border-white/10">
-                  <ImageWithFallback
-                    src={project.heroImage}
-                    alt={project.heroImageAlt}
-                    fallbackTitle={project.title}
-                    aspectRatioClass={idx === 0 || idx === 3 ? 'aspect-[16/10]' : 'aspect-[4/3]'}
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                <div className="relative aspect-[3/4] overflow-hidden bg-black/50 border border-white/10 rounded-xs">
+                  <img
+                    src={proj.image}
+                    alt={proj.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-xs text-white text-[10px] font-mono uppercase px-3 py-1 tracking-wider">
-                    {project.status}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                  
+                  {/* Subtle Title Badge on image bottom */}
+                  <div className="absolute bottom-4 left-4 right-4 space-y-1">
+                    <span className="text-sm font-bold text-white block">
+                      {proj.title}
+                    </span>
+                    <span className="text-[11px] text-white/70 line-clamp-2 font-light">
+                      {proj.description}
+                    </span>
                   </div>
                 </div>
-
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2.5 text-xs text-[#20221F]/60 dark:text-white/50 font-mono">
-                    <span>{project.categoryLabel}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{project.location}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{project.area}</span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-serif text-[#20221F] dark:text-white group-hover:text-[#977B58] transition-colors leading-snug">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-sm text-[#20221F]/75 dark:text-white/70 font-sans leading-relaxed line-clamp-2 font-light">
-                    {project.subtitle}
-                  </p>
-                </div>
-              </article>
+              </div>
             ))}
           </div>
 
         </div>
       </section>
 
-      {/* ============================================================
-          STREAM 10: EDITORIAL ESSAY HIGHLIGHTS
-          ============================================================ */}
-      <section className="py-28 px-4 md:px-8 lg:px-12 bg-[#F4F1EB] dark:bg-[#121311] border-t border-[#D8D0C3] dark:border-white/10 transition-colors duration-500">
-        <div className="max-w-7xl mx-auto space-y-16">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#D8D0C3] dark:border-white/10 gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#977B58] block">
-                Thought Leadership
-              </span>
-              <h2 className="text-4xl md:text-5xl font-serif text-[#20221F] dark:text-white leading-tight">
-                From the Journal
-              </h2>
-            </div>
-            <button
-              onClick={() => navigate('/journal')}
-              className="text-xs font-mono uppercase tracking-wider text-[#20221F] dark:text-white hover:text-[#977B58] transition-colors border-b border-[#20221F] dark:border-white pb-1 cursor-pointer"
-            >
-              All Essays →
-            </button>
-          </div>
+      {/* =========================================================================
+          SECTION 5: BELOVED DAY / NIGHT DUAL CURTAIN INTERACTIVE STUDY
+          ========================================================================= */}
+      <InteractiveLightSlider />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {featuredArticles.map((article) => (
-              <article
-                key={article.slug}
-                onClick={() => navigate(`/journal/${article.slug}`)}
-                className="group cursor-pointer border border-[#D8D0C3] dark:border-white/10 bg-white dark:bg-[#1A1C19] p-6 flex flex-col justify-between transition-colors hover:border-[#977B58] space-y-6"
-              >
-                <div className="space-y-4">
-                  <div className="relative overflow-hidden aspect-[16/10] bg-[#20221F]">
-                    <img
-                      src={article.heroImage}
-                      alt={article.heroImageAlt}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                    />
-                  </div>
-                  <div className="text-[11px] font-mono text-[#20221F]/60 dark:text-white/50">
-                    {article.category} · {article.readTime}
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-serif text-[#20221F] dark:text-white group-hover:text-[#977B58] transition-colors leading-snug">
-                    {article.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#20221F]/70 dark:text-white/60 font-sans line-clamp-2 leading-relaxed font-light">
-                    {article.excerpt}
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-[#D8D0C3] dark:border-white/10 text-xs font-mono text-[#977B58]">
-                  Read Essay →
-                </div>
-              </article>
-            ))}
-          </div>
+      {/* =========================================================================
+          SECTION 6: SIGNATURE 3D LIVING EXPERIENCE
+          ========================================================================= */}
+      <Signature3DExperience />
 
-        </div>
-      </section>
-
-      {/* ============================================================
-          STREAM 11: FULL-BLEED CLOSING INVITATION (CINEMATIC)
-          ============================================================ */}
-      <section className="relative py-32 px-4 md:px-8 lg:px-12 bg-[#121311] text-white text-center overflow-hidden border-t border-white/10">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1920&q=80"
-            alt="Dusk waterside pavilion in tropical Nigeria"
-            referrerPolicy="no-referrer"
-            className="w-full h-full object-cover opacity-25 scale-105 pointer-events-none"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto space-y-8">
-          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8D0C3] block">
-            Begin the Journey
+      {/* =========================================================================
+          SECTION 7: CLOSING CALL TO ACTION
+          ========================================================================= */}
+      <section className="py-28 px-6 md:px-12 lg:px-16 bg-[#0B0C0E] border-t border-white/10 text-center">
+        <div className="max-w-2xl mx-auto space-y-6">
+          <span className="text-xs uppercase tracking-widest text-white/40 font-mono block">
+            Start Your Journey
           </span>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif text-white leading-tight tracking-tight">
-            Your next chapter begins with a conversation.
+          <h2 className="text-3xl sm:text-5xl font-black uppercase text-white tracking-tight leading-tight">
+            Ready to build your dream home?
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-xl mx-auto font-sans font-light leading-relaxed">
-            Whether you have secured land in Lagos, Abuja, or the countryside, or are reimagining your current home, we welcome an exploratory dialogue with physical models and material samples.
+          <p className="text-sm text-white/70 font-light leading-relaxed">
+            From architectural feasibility to turnkey construction, we guide you every step of the way.
           </p>
-          <div className="pt-4">
+          <div className="pt-4 flex flex-wrap justify-center gap-4">
             <button
               onClick={() => navigate('/contact')}
-              className="px-9 py-4 text-xs font-mono uppercase tracking-widest font-semibold text-[#121311] bg-[#F4F1EB] hover:bg-[#D8D0C3] transition-all rounded-sm cursor-pointer shadow-xl"
+              className="px-8 py-3.5 bg-white text-black font-semibold text-xs uppercase tracking-wider rounded-xs hover:bg-white/90 transition-colors shadow-lg cursor-pointer"
             >
-              Start your project
+              Book consultation
+            </button>
+            <button
+              onClick={() => navigate('/projects')}
+              className="px-8 py-3.5 bg-transparent border border-white/25 text-white font-medium text-xs uppercase tracking-wider rounded-xs hover:bg-white/10 transition-colors cursor-pointer"
+            >
+              Browse catalog
             </button>
           </div>
         </div>

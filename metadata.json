@@ -2,5 +2,7 @@
   "name": "DreamBuilt Architecture",
   "description": "Thoughtful contemporary residential architecture, mindful renovations, and seamless landscape integration.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

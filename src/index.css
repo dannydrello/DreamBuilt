@@ -2,37 +2,148 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ==========================================================================
+   LPAS ARCHITECTURE TYPOGRAPHY: AEONIK FONT FAMILY
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('https://lpas.com/wp-content/themes/lpas/dist/assets/aeonik-light-CEYRpx_s.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('https://lpas.com/wp-content/themes/lpas/dist/assets/aeonik-lightitalic-tFlzcVfu.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('https://lpas.com/wp-content/themes/lpas/dist/assets/aeonik-regular-DSAxWCt1.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('https://lpas.com/wp-content/themes/lpas/dist/assets/aeonik-regularitalic-1358UKkJ.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('https://lpas.com/wp-content/themes/lpas/dist/assets/aeonik-semibold-B5O2lxMW.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('https://lpas.com/wp-content/themes/lpas/dist/assets/aeonik-semibolditalic-BykpAuRR.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
-  --font-serif: "Italiana", "Playfair Display", Georgia, serif;
-  --font-display: "Cinzel", "Italiana", serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --color-ivory: #F4F1EB;
-  --color-ivory-light: #FAF8F5;
-  --color-limestone: #D8D0C3;
-  --color-limestone-light: #E8E2D8;
-  --color-charcoal: #20221F;
-  --color-charcoal-dark: #121311;
-  --color-charcoal-surface: #1A1C19;
-  --color-charcoal-muted: #2E322C;
-  --color-olive: #68705C;
-  --color-olive-dark: #4A5141;
-  --color-bronze: #977B58;
-  --color-bronze-light: #B79A73;
+  --font-sans: 'Aeonik', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: 'Aeonik', sans-serif;
+  --font-display: 'Aeonik', sans-serif;
+  
+  --color-ivory: #F5F5F3;
+  --color-ivory-light: #FAFAF8;
+  --color-limestone: #E5E5E1;
+  --color-charcoal: #111111;
+  --color-charcoal-dark: #0D0E0C;
+  --color-charcoal-surface: #161815;
+  --color-slate-lpas: #282828;
+  --color-amber-lpas: #E37434;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: var(--font-sans);
+    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.015em;
   }
 
-  h1, h2, h3, .font-serif {
-    font-family: var(--font-serif);
+  body {
+    font-family: 'Aeonik', sans-serif;
   }
 
-  .font-display {
-    font-family: var(--font-display);
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Aeonik', sans-serif;
+    letter-spacing: -0.025em;
   }
+}
+
+/* LPAS Exact Scale Typography Utilities */
+.font-3XL {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 400;
+  line-height: 102%;
+  letter-spacing: -0.03em;
+  font-size: clamp(3.2rem, 1rem + 5.5vw, 6.8rem);
+}
+
+.font-XXL {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 400;
+  line-height: 108%;
+  letter-spacing: -0.025em;
+  font-size: clamp(2.4rem, 0.8rem + 4vw, 4.6rem);
+}
+
+.font-XL {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 400;
+  line-height: 115%;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.8rem, 0.6rem + 2.5vw, 3rem);
+}
+
+.font-M {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 400;
+  line-height: 125%;
+  font-size: clamp(1.4rem, 0.5rem + 1.5vw, 2rem);
+}
+
+.font-S {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 400;
+  line-height: 140%;
+  font-size: 0.95rem;
+}
+
+.font-S--semibold {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 600;
+  line-height: 135%;
+  font-size: 0.95rem;
+}
+
+.font-XS {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 400;
+  line-height: 140%;
+  font-size: 0.8rem;
+}
+
+.font-XS--semibold {
+  font-family: 'Aeonik', sans-serif;
+  font-weight: 600;
+  line-height: 140%;
+  font-size: 0.8rem;
 }
 
 /* Marquee continuous motion */
@@ -60,39 +171,34 @@
   animation: progress 7.5s linear infinite;
 }
 
-/* Subtle architectural line reveals */
-@keyframes subtlePulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
+/* Cinematic subtle motion for hero architecture image */
+@keyframes slowKenBurns {
+  0% {
+    transform: scale(1.01) translate(0%, 0%);
+  }
+  50% {
+    transform: scale(1.06) translate(-0.6%, -0.4%);
+  }
+  100% {
+    transform: scale(1.02) translate(0.4%, 0.2%);
+  }
 }
 
-.animate-subtle-pulse {
-  animation: subtlePulse 4s ease-in-out infinite;
+.animate-picture-motion {
+  animation: slowKenBurns 22s ease-in-out infinite alternate;
 }
 
-/* Glassmorphism restrained overlays */
-.glass-panel {
-  background: rgba(244, 241, 235, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(216, 208, 195, 0.5);
+/* Gentle text depth floating behind house roofline */
+@keyframes textFloatBehind {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
 }
 
-.dark .glass-panel {
-  background: rgba(18, 19, 17, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.animate-text-behind {
+  animation: textFloatBehind 7s ease-in-out infinite;
 }
 
-.glass-dark {
-  background: rgba(18, 19, 17, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-*:focus-visible {
-  outline: 2px solid var(--color-bronze);
-  outline-offset: 2px;
-}

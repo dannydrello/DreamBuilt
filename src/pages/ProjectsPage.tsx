@@ -26,13 +26,13 @@ export const ProjectsPage: React.FC = () => {
         {/* Page Header (Airy & uncluttered) */}
         <div className="max-w-3xl space-y-4">
           <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#977B58] block">
-            Selected Architecture
+            Nigerian Residential Architecture
           </span>
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#20221F] dark:text-white tracking-tight leading-[1.1]">
-            Projects & Conceptual Studies
+            Houses & Bespoke Pavilions
           </h1>
           <p className="text-base sm:text-lg text-[#20221F]/75 dark:text-white/70 font-sans leading-relaxed font-light pt-2 max-w-2xl">
-            Each study embodies our preoccupation with natural illumination, durable natural geology, and the intimate dialogue between interior volume and native landscape.
+            We transform dreams into houses. Each residential commission in Lagos, Abuja, and beyond embodies our preoccupation with equatorial natural illumination, passive cross-ventilation, and tactile Nigerian materiality.
           </p>
         </div>
 
